@@ -41,17 +41,17 @@ public class ComputerPlayer extends Player {
 			return null;
 		}
 		Random random=new Random();
-		Object[]objectArr;
-		return ((String[])(objectArr=guessWordSet.toArray()))[random.nextInt(objectArr.length)];
+		Object[]objectArr=guessWordSet.toArray();
+		return (String)objectArr[random.nextInt(objectArr.length)];
 	}
 	
 	public void evaluateGuessWord(String guessWord, int matches) {
 		ArrayList<String>temp=new ArrayList<String>();
-		for(String str:((String[])(guessWordSet.toArray()))) {
-			if(DictWord.matchingChars(str, guessWord)==matches)
-				temp.add(str);
+		for(Object obj:((guessWordSet.toArray()))) {
+			if(DictWord.matchingChars((String)obj, guessWord)==matches && !guessWord.equals((String)obj))
+				temp.add((String)obj);
 		}
-		guessWordSet.removeAll(temp);
+		guessWordSet=new HashSet(temp);
 	}
 	
 }

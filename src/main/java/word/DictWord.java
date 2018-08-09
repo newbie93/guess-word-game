@@ -19,6 +19,11 @@ public class DictWord {
 
 	public DictWord(int length) {
 		this.length=length;
+		this.allWords=new ArrayList<String>();
+		this.validWords=new ArrayList<String>();
+		loadDic();
+		//for(String str:validWords)
+		//	System.out.println(str);
 	}
 
 	private void loadDic() {
@@ -74,8 +79,6 @@ public class DictWord {
 	public ArrayList<String> getValidWords() {
 		return validWords;
 	}
-
-	
 
 }
 

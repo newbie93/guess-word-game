@@ -6,10 +6,14 @@ import org.slf4j.LoggerFactory;
 public abstract class Player {
 	
 	private static final Logger logger = LoggerFactory.getLogger(Player.class);
-	private String name;
+	protected String name;
 	
 	public Player(String name) {
 		this.name=name;
+	}
+	
+	public String getName() {
+		return name;
 	}
 	
 	public abstract String guessWord();

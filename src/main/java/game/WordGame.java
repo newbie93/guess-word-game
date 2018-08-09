@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import game.player.Player;
+import utils.DisplayUtils;
 
 public class WordGame {
 
@@ -13,23 +14,32 @@ public class WordGame {
 	private Player player2;
 	private WordGameLevel wordGameLevel;
 	private WordGameState wordGameState;
-	private Player turn;
+	private Player currentPlayer;
 
 	public WordGame(Player player1, Player player2, WordGameLevel wordGameLevel) {
 		this.player1=player1;
 		this.player2=player2;
 		this.wordGameLevel=wordGameLevel;
 		this.wordGameState=WordGameState.IN_PROGRESS;
-		this.turn=player1;
+		this.currentPlayer=player1;
 	}
 
 	public void playTurns() {
-		String guessedWord=turn.guessWord();
-		if(nextTurn().isSecretWord(guessedWord))
-			setWinner(turn);//player turn wins
-		int matches=nextTurn().numOfMatchedChars(guessedWord);
-		turn.evaluateGuessWord(guessedWord, matches);
-		turn=nextTurn();
+		DisplayUtils.displayAskForWord(currentPlayer, nextPlayer());
+		String guessedWord=currentPlayer.guessWord();	
+		DisplayUtils.displayIsSecret(nextPlayer(), guessedWord);
+		
+		if(nextPlayer().isSecretWord(guessedWord)) {
+			setWinner(currentPlayer);//player turn wins
+			DisplayUtils.displayWin(currentPlayer);
+			return;
+		}
+		
+		DisplayUtils.displayAskForMatchingCharacters(nextPlayer(), currentPlayer, guessedWord);
+		int matches=nextPlayer().numOfMatchedChars(guessedWord);
+		DisplayUtils.displayCharFreqFeedback(matches);
+		currentPlayer.evaluateGuessWord(guessedWord, matches);
+		currentPlayer=nextPlayer();
 	}
 
 	private void setWinner(Player player) {
@@ -39,8 +49,8 @@ public class WordGame {
 			wordGameState=WordGameState.PLAYER_2_WON;
 	}
 
-	private Player nextTurn() {
-		if(turn==player1)
+	private Player nextPlayer() {
+		if(currentPlayer==player1)
 			return player2;
 		return player1;
 	}

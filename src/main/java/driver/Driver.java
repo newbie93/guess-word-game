@@ -13,6 +13,7 @@ public class Driver {
 	
 	public Driver(WordGame wordGame) {
 		this.wordGame=wordGame;
+		this.startGame();
 	}
 	
 	public void startGame() {

@@ -11,13 +11,14 @@ import org.slf4j.LoggerFactory;
 public class FileInputUtils {
 	
 
-	private static final String DIC_PATH="";
+	private static final String DIC_PATH="/Users/righosh/Downloads/sowpods.txt";
 	private static Logger logger=LoggerFactory.getLogger(FileInputUtils.class);
 	//private static BufferedReader fileReader;
 	
 	
 	public static ArrayList<String> fetchFromDicFile() {
 		try {
+			@SuppressWarnings("resource")
 			BufferedReader fileReader = new BufferedReader(new FileReader(new File(DIC_PATH)));
 			ArrayList<String>list=new ArrayList<String>();
 			String str;
