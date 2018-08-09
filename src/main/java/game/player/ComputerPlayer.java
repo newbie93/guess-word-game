@@ -1,6 +1,7 @@
 package game.player;
 
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
@@ -24,7 +25,6 @@ public class ComputerPlayer extends Player {
 		this.secretWord=dictWord.getRandomWordFromWordList();
 		guessWordSet=new HashSet<String>();
 		guessWordSet.addAll(dictWord.getAllWords());
-		//currentGuessWord="";
 	}
 	
 	public boolean isSecretWord(String str) {
@@ -36,18 +36,22 @@ public class ComputerPlayer extends Player {
 	}
 
 	public String guessWord() {
+		if(guessWordSet.size()==0) {
+			logger.info("No word found!");
+			return null;
+		}
 		Random random=new Random();
 		Object[]objectArr;
 		return ((String[])(objectArr=guessWordSet.toArray()))[random.nextInt(objectArr.length)];
 	}
 	
 	public void evaluateGuessWord(String guessWord, int matches) {
-		Set<String>temp=new HashSet<String>();
+		ArrayList<String>temp=new ArrayList<String>();
 		for(String str:((String[])(guessWordSet.toArray()))) {
 			if(DictWord.matchingChars(str, guessWord)==matches)
 				temp.add(str);
 		}
-		guessWordSet.removeAll(temp.toArray());
+		guessWordSet.removeAll(temp);
 	}
 	
 }

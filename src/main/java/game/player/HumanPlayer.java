@@ -22,5 +22,9 @@ public class HumanPlayer extends Player {
 	public String guessWord() {
 		return "";
 	}
+	
+	public void evaluateGuessWord(String guessWord, int matches) {
+		
+	}
 
 }
