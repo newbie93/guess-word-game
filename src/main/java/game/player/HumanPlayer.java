@@ -11,6 +11,14 @@ public class HumanPlayer extends Player {
 		super(name);
 	}
 	
+	public boolean isSecretWord(String str) {
+		return false;
+	}
+	
+	public int numOfMatchedChars(String str) {
+		return 0;
+	}
+	
 	public String guessWord() {
 		return "";
 	}

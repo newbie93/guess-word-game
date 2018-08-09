@@ -23,9 +23,12 @@ public class WordGame {
 		this.turn=player1;
 	}
 	
-	public void play() {
+	public void playTurns() {
 		String guessedWord=turn.guessWord();
-		nextTurn().
+		if(nextTurn().isSecretWord(guessedWord))
+			;//player nextTurn() wins
+		int matches=nextTurn().numOfMatchedChars(guessedWord);
+		turn=nextTurn();
 	}
 	
 	public Player nextTurn() {
@@ -33,5 +36,23 @@ public class WordGame {
 			return player2;
 		return player1;
 	}
+	
+	public Player getPlayer1() {
+		return player1;
+	}
+
+	public Player getPlayer2() {
+		return player2;
+	}
+
+	public WordGameLevel getWordGameLevel() {
+		return wordGameLevel;
+	}
+
+	public WordGameState getWordGameState() {
+		return wordGameState;
+	}
+
+	
 	
 }

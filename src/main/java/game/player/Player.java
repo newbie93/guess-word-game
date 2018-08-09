@@ -13,5 +13,9 @@ public abstract class Player {
 	}
 	
 	public abstract String guessWord();
+	
+	public abstract boolean isSecretWord(String str);
+	
+	public abstract int numOfMatchedChars(String str);
 
 }
