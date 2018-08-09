@@ -13,10 +13,10 @@ public class Driver {
 	
 	public Driver(WordGame wordGame) {
 		this.wordGame=wordGame;
-		this.startGame();
+		this.playGame();
 	}
 	
-	public void startGame() {
+	public void playGame() {
 		while(wordGame.getWordGameState()==WordGameState.IN_PROGRESS) {
 			wordGame.playTurns();
 		}
